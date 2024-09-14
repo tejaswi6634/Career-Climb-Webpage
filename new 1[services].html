@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Climb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .card {
+      width: calc(23.33% - 40px);
+      aspect-ratio: 1 / 0.7;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      margin: 25px;
+    }
+    .card .image-box {
+      width: 100%;
+      border-radius: inherit;
+      overflow: hidden;
+    }
+    .card .image-box img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: 50% 90%;
+      border-radius: inherit;
+      transition: 0.5s ease-in-out;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid white;
+      border-radius: inherit;
+      opacity: 0;
+      transition: 0.4s ease-in-out;
+    }
+    .card .content h2 {
+     color:	#800020;
+	 
+    }
+
+    .card:hover img {
+      filter: grayscale(1) brightness(0.4);
+    }
+    .card:hover::after {
+      opacity: 1;
+      inset: 20px;
+    }
+
+    .content {
+      width: 80%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .content h2,
+    .content p {
+      opacity: 0;
+      transition: 0.4s 0.2s ease;
+    }
+    .content h2 {
+      margin-bottom: 12px;
+      scale: 0.7;
+    }
+    .content p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #d1d1d1;
+      transform: translateY(50%);
+    }
+    .card:hover .content h2 {
+      scale: 1;
+      opacity: 1;
+    }
+    .card:hover .content p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }   
+
+    nav {
+      position:relative;
+      width:524px;
+      height:50px;
+      background:#222;
+      border-radius:8px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    nav a {
+      position:relative;
+      display: inline-block;
+      font-size:1em;
+      font-weight:500;
+      color:#fff;
+      text-decoration:none;
+      padding:0 23px;
+      z-index: 1;
+    }
+
+    nav span {
+      position:absolute;
+      top:0;
+      left:0;
+      width:95px;
+      height:100%;
+      background: linear-gradient(45deg, #4f1919,#ff3333);
+      border-radius:8px;
+      transition:.5s;
+    }
+
+    nav a:hover~span {
+      left:0;
+    }
+
+    nav a:nth-child(2):hover~span {
+      left:110px;
+    }
+
+    nav a:nth-child(3):hover~span {
+      left:230px;
+    }
+
+    nav a:nth-child(4):hover~span {
+      left:300px;
+      width:115px;
+    }
+
+    nav a:nth-child(5):hover~span {
+      left:413px;
+      width:110px;
+    }
+
+    header {
+      background-color: purple;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-style: italic;
+    }
+
+    .large-letter {
+      font-size: 2em;
+    }
+
+    .small-letter {
+      font-size: 2em;
+    }
+
+    .login-btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      background-color: transparent;
+      color: #181818;
+      font-size: 17px;
+      font-weight: 500;
+      border: 3px solid transparent;
+      border-radius: 8px;
+      box-shadow: 0 0 0 #fec1958c;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .star-1 {
+      position: absolute;
+      top: 20%;
+      left: 10px; 
+      width: 25px;
+      height: auto;
+      filter: drop-shadow(0 0 0 #fffdef);
+      z-index: -5;
+    }
+
+    .login-btn:hover {
+      background-color: #fec195;
+      border-color: #fec195;
+      box-shadow: 0 0 20px #fec1958c;
+    }
+
+    .star-2 {
+      position: absolute;
+      top: -25px;
+      left: 10px; 
+      width: 15px;
+      height: auto;
+      filter: drop-shadow(0 0 10px #fffdef);
+      z-index: 2;
+    }
+    
+    /* Additional CSS for login pop-up */
+    #loginContainer, #registerContainer {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+      width: 400px; 
+      max-height: 400px; 
+      overflow: auto;
+    }
+
+    .login-container {
+      text-align: center;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="file"] {
+      margin: 10px 0;
+      padding: 8px;
+      width: 300px; 
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button[type="submit"],
+    .register-btn {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      background-color: #add8e6;
+      color: #fff;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button[type="submit"]:hover,
+    .register-btn:hover {
+      background-color: #ffb6c1;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Blink animation */
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+    
+    .card:nth-of-type(1) {
+      margin-top: 100px; /* Adjusted margin-top to create space below Services heading */
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="large-letter">C</span>areer <span class="small-letter">C</span>limb</h1>
+        <nav> 
+		    <a href="./home.html">About</a>
+            <a href="./Features.html">Features</a>
+            <a href="./Services.html">Services</a>
+            <a href="#">Help</a>
+            <a href="contactus.html">Contact us</a>
+		    <span></span>
+		</nav>
+        <button class="login-btn" onclick="showLogin()" style="color:white;">Login<span class="star-1"><img class="star-2" src="https://www.iconsdb.com/icons/preview/white/star-xxl.png" alt="Star"></span></button>
+    </header>
+    
+    <section id="services">
+	<br>
+	<br>
+	
+        <h1 align="center"><big>Services</big></h1>
+    </section>
+	<p></p>
+	<p></p>
+	<p></p>
+	
+    <div class="container" id="loginContainer">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form>
+                <input type="text" placeholder="Username">
+                <br>
+                <input type="password" placeholder="Password">
+                <br>
+                <button type="submit">Login</button>
+                <br>
+                <p><a href="#">Forgot password?</a></p>
+                <p>Don't have an account? <span class="register-btn" onclick="showRegister()">Register</span></p>
+            </form>
+        </div>
+    </div>
+    <div class="container" id="registerContainer" style="display:none;">
+        <div class="login-container">
+            <h2>Register</h2>
+            <form>
+                <label for="userType">Register as:</label>
+                <select id="userType">
+                    <option value="employee">Unemployee</option>
+                    <option value="organization">Organization</option>
+                </select>
+                <br>
+                <input type="text" placeholder="Username" required>
+                <br>
+                <input type="email" placeholder="Email" required>
+                <br>
+                <input type="password" placeholder="Password" required>
+                <br>
+                <div id="employeeFields">
+                    <input type="text" placeholder="Name" required>
+                    <br>
+                    <input type="text" placeholder="Age" required>
+                    <br>
+                    <input type="file" accept=".pdf,.doc,.docx" required>
+                    <br>
+                    <input type="text" placeholder="Desired role" required>
+                </div>
+                <div id="organizationFields" style="display:none;">
+                    <input type="text" placeholder="Organization name" required>
+                    <br>
+                    <input type="text" placeholder="Required skills" required>
+                    <br>
+                    <input type="text" placeholder="Vacant job name" required>
+                    <br>
+                    <input type="number" placeholder="Number of vacancies" required>
+                </div>
+                <br>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="image-box">
+            <img src="https://factorialhr.com/wp-content/uploads/2019/12/12132801/recruitment-process1.jpeg" width="300px" /> 
+        </div>
+        <div class="content">
+           <h2>Recruitment and Hiring</h2>
+            <p>Our website provides comprehensive recruitment and hiring services, streamlining the process for both employers and job seekers.</p>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="image-box">
+            <img src="https://www.companybug.com/wp-content/uploads/2019/11/circle-312343_1280.png" width="300px" /> 
+        </div>
+        <div class="content">
+           <h2>Diversification and Inclusion Initiative</h2>
+            <p>We are committed to promoting diversity and inclusion across our organization, ensuring equal opportunities for all and enriching our culture.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="image-box">
+            <img src="https://www.shutterstock.com/image-vector/member-login-flat-design-white-600nw-225749503.jpg" width="300px" /> 
+        </div>
+        <div class="content">
+           <h2>Company Login and Posting</h2>
+            <p>Companies can create accounts and securely log in to our platform to post their vacant positions quickly and efficiently.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="image-box">
+            <img src="https://static.vecteezy.com/system/resources/previews/014/810/988/original/user-friendly-line-icon-vector.jpg" width="300px" /> 
+        </div>
+        <div class="content">
+           <h2>User-Friendly Interface</h2>
+            <p>Our website is designed with a clean and intuitive interface, making it easy for both companies and job seekers to navigate and find what they need.</p>
+        </div>
+    </div>
+    
+    <script>
+        function showLogin() {
+            document.getElementById("loginContainer").style.display = "block";
+            document.getElementById("registerContainer").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "block";
+            document.getElementById("employeeFields").style.display = "block";
+            document.getElementById("organizationFields").style.display = "none";
+        }
+
+        function toggleServices() {
+            const servicesSection = document.getElementById('services');
+            servicesSection.style.display = 'block';
+            servicesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById("userType").addEventListener("change", function() {
+            if (this.value === "employee") {
+                document.getElementById("employeeFields").style.display = "block";
+                document.getElementById("organizationFields").style.display = "none";
+            } else {
+                document.getElementById("employeeFields").style.display = "none";
+                document.getElementById("organizationFields").style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

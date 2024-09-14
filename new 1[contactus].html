@@ -1,0 +1,439 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+       body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body covers at least the viewport height */
+           // background-image: url('https://images.inc.com/uploaded_files/image/1920x1080/getty_508399085_2000133320009280270_319046.jpg');
+            background-size: 1000px 900px; /* Cover the entire body */
+            background-repeat: no-repeat;
+            background-position:center right; /* Image positioned at the top right */
+        }
+
+        nav {
+            position:relative;
+            width:524px;
+            height:50px;
+            background:#222;
+            border-radius:8px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        nav a {
+            position:relative;
+            display: inline-block;
+            font-size:1em;
+            font-weight:500;
+            color:#fff;
+            text-decoration:none;
+            padding:0 23px;
+            z-index: 1;
+        }
+		 .quote {
+            position: absolute;
+            left: 50px; /* Adjusted position */
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            background-color: white; /* Background color changed to white */
+        }
+  .large-quote {
+            font-size: 1.8em; /* Increased font size */
+            color: #333;
+            font-style: italic;
+            font-weight: bold; /* Bold text */
+        }
+
+        .find-job-btn, .hire-employee-btn {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px; /* Added margin to separate buttons */
+        }
+
+        .find-job-btn:hover, .hire-employee-btn:hover {
+            background-color: #6a0080;
+			}
+
+        .quote-buttons {
+            display: flex;
+        }
+
+        nav span {
+            position:absolute;
+            top:0;
+            left:0;
+            width:95px;
+            height:100%;
+            background: linear-gradient(45deg, #4f1919,#ff3333);
+            border-radius:8px;
+            transition:.5s;
+        }
+
+        nav a:hover~span {
+            left:0;
+        }
+
+        nav a:nth-child(2):hover~span {
+            left:110px;
+        }
+
+        nav a:nth-child(3):hover~span {
+            left:230px;
+
+        }
+
+        nav a:nth-child(4):hover~span {
+            left:300px;
+            width:115px;
+        }
+
+        nav a:nth-child(5):hover~span {
+            left:413px;
+            width:110px;
+        }
+
+        header {
+            background-color: purple;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .large-letter {
+            font-size: 2em;
+        }
+
+        .small-letter {
+            font-size: 2em;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            color: #181818;
+            font-size: 17px;
+            font-weight: 500;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 0 #fec1958c;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .star-1 {
+            position: absolute;
+            top: 20%;
+            left: 10px; /* Adjusted position */
+            width: 25px;
+            height: auto;
+            filter: drop-shadow(0 0 0 #fffdef);
+            z-index: -5;
+        }
+
+        .login-btn:hover {
+            background-color: #fec195;
+            border-color: #fec195;
+            box-shadow: 0 0 20px #fec1958c;
+        }
+
+        .star-2 {
+            position: absolute;
+            top: -25px;
+            left: 10px; /* Adjusted position */
+            width: 15px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #fffdef);
+            z-index: 2;
+        }
+
+        /* Additional CSS for login pop-up */
+        #loginContainer, #registerContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 400px; /* Adjusted width */
+            max-height: 400px; /* Adjusted height */
+            overflow: auto;
+        }
+
+        .login-container {
+            text-align: center;
+
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px; /* Adjusted width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"],
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #add8e6;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        .register-btn:hover {
+            background-color: #ffb6c1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated CSS for close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: black; /* Keep the wrong mark in black */
+            transition: background-color 0.3s, padding 0.3s; /* Add transition for background color and padding */
+            padding: 5px; /* Add padding to increase the area */
+        }
+
+        .close-btn:hover {
+            background-color: red; /* Change background color to red on hover */
+            padding: 10px; /* Increase padding on hover */
+        }
+</style>
+<style>
+body {
+	font-family: Arial;
+}
+
+.container {
+	max-width: 1180px;
+	margin: 0 auto;
+	line-height: 1.5;
+}
+/*  header style starts */
+.site-banner {
+	min-height: 400px;
+	background-image: url('https://www.raymond.in/static/media/Contact%20us%20banner%20.7a073f8d0667605662b2.jpg');
+	background-size: cover;
+	background-position: center;
+	color: #ffffff;
+}
+
+.site-banner a {
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+	padding: 12px;
+}
+
+.header-menu {
+	padding: 40px 20px;
+}
+
+#header-right-menu {
+	float: right;
+}
+
+.header-active {
+	background: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+}
+
+.heading {
+	color: #ffffff;
+	text-align: center;
+	font-family: cursive;
+	padding: 40px 0px;
+	font-size: 3em;
+	margin: 0px;
+}
+/*  header style ends */
+
+.footer {
+	display: flex;
+}
+
+.footer-column {
+	width: 33.3%;
+	float: left;
+}
+
+.map-image {
+	width: 100%;
+}
+
+.contact-form-container {
+	background-color: #eaeaea;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.tile-content {
+	padding: 20px 40px;
+}
+
+.tile-content .contact-row {
+	margin-bottom: 20px;
+}
+
+.tile-field {
+	margin-left: 20px;
+}
+
+.form-field {
+	width: 100%;
+	padding: 10px 8px;
+    border-radius: 4px;
+    border: #d9d8d8 1px solid;
+}
+
+.button {
+	color: #ffffff;
+	padding: 10px 30px;
+	background: #0072ff;
+	border: 0px;
+	font-size: 1.2em;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.blue-btn:hover {
+	color: #000000;
+	background: #eaeaea;
+}
+
+.row::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+
+.heading-section {
+	margin-bottom: 60px;
+}
+
+.contact-row {
+	padding-bottom: 40px;
+}
+
+@media screen and (max-width: 700px) {
+	.footer-column {
+		width: 100%;
+	}
+}
+</style>
+</head>
+<body>
+	<header class="site-banner">
+		<div class="header-menu">
+			<a href="#">Home</a>
+			<a href="#">About Us</a>
+			<a href="#">Products</a>
+			<a href="#">Career</a>
+			<a href="#">Blogs</a>
+			<a href="#">Contact</a>
+		</div>
+		<h1 class="heading"> Contact Us</h1>
+	</header>
+
+	<!-- Footer Section -->
+	<div class="footer">
+		<div class="footer-column contact-form-container">
+			<div class="tile-content">
+				<h2 class="heading-section">Send Us A Message</h2>
+				<div class="row">
+					<form>
+						<div class="contact-row">
+							<label for="full-name">Full Name</label>
+							<input id="full-name" type="text" placeholder="Full Name" class="form-field">
+						</div>
+						<div class="contact-row">
+							<label for="email">Email</label>
+							<!-- Updated to include 'mailto' functionality -->
+							<a href="mailto:support@example.com">
+								<input id="email" type="email" placeholder="Email" class="form-field">
+							</a>
+						</div>
+						<div class="contact-row">
+							<label for="file">Attachments</label>
+							<input id="file" type="file" class="form-field">
+						</div>
+						<div class="contact-row">
+							<label for="message">Your Message</label>
+							<textarea id="message" rows="8" placeholder="Your Message" class="form-field"></textarea>
+						</div>
+						<!-- Updated to include 'sendMessage' function -->
+						<button type="submit" class="button" onclick="sendMessage()">Send Message</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="footer-column">
+			<iframe src="https://maps.google.com/maps?q=India&z=15&output=embed" class="map-image"></iframe>
+		</div>
+		<div class="footer-column">
+			<h2 class="heading-section">Contact Us</h2>
+			<div class="tile-content">
+				<p>Office Address</p>
+				<p>+91 89822323</p>
+				<p>address@email.com</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Script for showing the pop-up when the "Send Message" button is clicked -->
+	<script>
+		function sendMessage() {
+			alert("Your message has been sent!");
+		}
+	</script>
+</body>
+</html>

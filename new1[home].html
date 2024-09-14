@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Climb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body covers at least the viewport height /   background-size: 1000px 900px; / Cover the entire body */
+            background-repeat: no-repeat;
+            background-position:center right; /* Image positioned at the top right */
+
+        }
+        h2 {
+            color: #666;
+        }
+        h2 {font-size: 42px;}
+        nav {
+            position:relative;
+			
+            background:#222;
+            width:524px;
+            height:50px;
+            border-radius:8px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        nav a {
+            position:relative;
+            display: inline-block;
+            font-size:1em;
+            font-weight:500;
+            color:#fff;
+            text-decoration:none;
+            padding:0 23px;
+            z-index: 1;
+        }
+        nav span {
+            position:absolute;
+            top:0;
+            left:0;
+            width:95px;
+            height:100%;
+            background: linear-gradient(45deg, #4f1919,#ff3333);
+            border-radius:8px;
+            transition:.5s;
+        }
+        nav a:hover~span {
+            left:0;
+        }
+        nav a:nth-child(2):hover~span {
+            left:110px;
+        }
+        nav a:nth-child(3):hover~span {
+            left:230px;
+        }
+        nav a:nth-child(4):hover~span {
+            left:300px;
+            width:115px;
+        }
+        nav a:nth-child(5):hover~span {
+            left:413px;
+            width:110px;
+        }
+        header {
+            
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            margin: 0;
+            font-style: italic;
+        }
+        .large-letter {
+            font-size: 2em;
+        }
+        .small-letter {
+            font-size: 2em;
+        }
+		
+		 .quote {
+            position: absolute;
+            left: 50px; /* Adjusted position */
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            background-color: white; /* Background color changed to white */
+        }
+		
+		
+        .large-quote {
+            font-size: 1.8em; /* Increased font size */
+            color: #333;
+            font-style: italic;
+            font-weight: bold; /* Bold text */
+        }
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            color: #181818;
+            font-size: 17px;
+            font-weight: 500;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 0 #fec1958c;
+            transition: all 0.3s ease-in-out;
+        }
+        .login-btn:hover {
+            background-color: #fec195;
+            border-color: #fec195;
+            box-shadow: 0 0 20px #fec1958c;
+        }
+        .star-1 {
+            position: absolute;
+            top: 20%;
+            left: 10px; /* Adjusted position */
+            width: 25px;
+            height: auto;
+            filter: drop-shadow(0 0 0 #fffdef);
+            z-index: -5;
+        }
+        .star-2 {
+            position: absolute;
+            top: -25px;
+            left: 10px; /* Adjusted position */
+            width: 15px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #fffdef);
+            z-index: 2;
+        }
+        #loginContainer, #registerContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 400px; /* Adjusted width */
+            max-height: 400px; /* Adjusted height */
+            overflow: auto;
+        }
+        .login-container {
+            text-align: center;
+            background-size: cover; /* Adjust background size */
+            background-position: center; /* Center the background image */
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px; /* Adjusted width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"],
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #add8e6;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button[type="submit"]:hover,
+        .register-btn:hover {
+            background-color: #ffb6c1;
+        }
+        h2.sectionTitle {
+            margin-bottom: 20px; /* Add margin bottom to create space */
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #about {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Styles for the images */
+        .image-container img {
+            width: 150px; /* Set width and height to create a small circle */
+            height: 150px; /* Set width and height to create a small circle */
+            border-radius: 50%; /* Make the images circular */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 5px solid purple; /* Add purple border */
+            margin-right: 60px; /* Add more margin between images */
+            margin-left: 60px; /* Add margin before the first image */
+        }
+        /* Hover effect on images */
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+        .image-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 20px;
+            float: left;
+        }
+        .image-container .description {
+            display: none;
+            position: absolute;
+            bottom: -50px; /* Adjusted position to display below the image */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 200px; /* Adjust the width as needed */
+        }
+
+        .image-container:hover .description {
+            display: block;
+        }
+		.find-job-btn, .hire-employee-btn {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px; /* Added margin to separate buttons */
+        }
+		 nav span {
+            position:absolute;
+            top:0;
+            left:0;
+            width:95px;
+            height:100%;
+            background: linear-gradient(45deg, #4f1919,#ff3333);
+            border-radius:8px;
+            transition:.5s;
+        }
+
+        nav a:hover~span {
+            left:0;
+        }
+
+        nav a:nth-child(2):hover~span {
+            left:110px;
+        }
+
+        nav a:nth-child(3):hover~span {
+            left:230px;
+
+        }
+
+        nav a:nth-child(4):hover~span {
+            left:300px;
+            width:115px;
+        }
+
+        nav a:nth-child(5):hover~span {
+            left:413px;
+            width:110px;
+        }
+
+        header {
+            background-color: purple;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .large-letter {
+            font-size: 2em;
+        }
+
+        .small-letter {
+            font-size: 2em;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            color: #181818;
+            font-size: 17px;
+            font-weight: 500;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 0 #fec1958c;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .star-1 {
+            position: absolute;
+            top: 20%;
+            left: 10px; /* Adjusted position */
+            width: 25px;
+            height: auto;
+            filter: drop-shadow(0 0 0 #fffdef);
+            z-index: -5;
+        }
+
+        .login-btn:hover {
+            background-color: #fec195;
+            border-color: #fec195;
+            box-shadow: 0 0 20px #fec1958c;
+        }
+
+        .star-2 {
+            position: absolute;
+            top: -25px;
+            left: 10px; /* Adjusted position */
+            width: 15px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #fffdef);
+            z-index: 2;
+        }
+
+        /* Additional CSS for login pop-up */
+        #loginContainer, #registerContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 400px; /* Adjusted width */
+            max-height: 400px; /* Adjusted height */
+            overflow: auto;
+        }
+
+        .login-container {
+            text-align: center;
+
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px; /* Adjusted width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"],
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #add8e6;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        .register-btn:hover {
+            background-color: #ffb6c1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated CSS for close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: black; /* Keep the wrong mark in black */
+            transition: background-color 0.3s, padding 0.3s; /* Add transition for background color and padding */
+            padding: 5px; /* Add padding to increase the area */
+        }
+
+        .close-btn:hover {
+            background-color: red; /* Change background color to red on hover */
+            padding: 10px; /* Increase padding on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="large-letter">C</span>areer <span class="small-letter">C</span>limb</h1>
+        <nav> 
+            <a href="./home.html">About</a>
+            <a href="./Features.html">Features</a>
+            <a href="./Services.html">Services</a>
+            <a href="#">Help</a>
+            <a href="contactus.html">Contact us</a>
+            <span></span>
+        </nav>
+        <button class="login-btn" onclick="showLogin()" style="color:white;">Login</button>
+    </header>
+    <div class="container" id="loginContainer">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form>
+                <input type="text" placeholder="Username">
+                <br>
+                <input type="password" placeholder="Password">
+                <br>
+                <button type="submit">Login</button>
+                <br>
+                <p><a href="#">Forgot password?</a></p>
+                <p>Don't have an account? <span class="register-btn" onclick="showRegister()">Register</span></p>
+            </form>
+        </div>
+    </div>
+    <div class="container" id="registerContainer" style="display:none;">
+        <div class="login-container">
+            <h2>Register</h2>
+            <form>
+                <label for="userType">Register as:</label>
+                <select id="userType">
+                    <option value="employee">Unemployee</option>
+                    <option value="organization">Organization</option>
+                </select>
+                <br>
+                <input type="text" placeholder="Username" required>
+                <br>
+                <input type="email" placeholder="Email" required>
+                <br>
+                <input type="password" placeholder="Password" required>
+                <br>
+                <div id="employeeFields">
+                    <input type="text" placeholder="Name" required>
+                    <br>
+                    <input type="text" placeholder="Age" required>
+                    <br>
+                    <input type="file" accept=".pdf,.doc,.docx" required>
+                    <br>
+                    <input type="text" placeholder="Desired role" required>
+                </div>
+                <div id="organizationFields" style="display:none;">
+                    <input type="text" placeholder="Organization name" required>
+                    <br>
+                    <input type="text" placeholder="Required skills" required>
+                    <br>
+                    <input type="text" placeholder="Vacant job name" required>
+                    <br>
+                    <input type="number" placeholder="Number of vacancies" required>
+                </div>
+                <br>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+    </div>
+    <section id="about" class="section">
+        <section id="featureContainer" class="section-80-80 grayBgSection">
+            <h2 class="sectionTitle" align="center"><big style="color:purple">ABOUT</big></h2>
+            <div class="titleSeparator"></div>
+            <div class="separator80"></div>
+            <div class="row">
+                <div class="image-container">
+                    <img src="https://static.wixstatic.com/media/4dbec6_853c8c2c95844333b2d0357f6961a8b1~mv2.jpg/v1/fill/w_640,h_388,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/4dbec6_853c8c2c95844333b2d0357f6961a8b1~mv2.jpg" alt="Feature 1">
+                    <div class="description">
+                        <p style="color: purple;">Employee Centric</p>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img src="https://media1.thehungryjpeg.com/thumbs2/ori_3744269_sshyvqfi6ski9fcn6ub210r9rki0wq7wk3ql12kr_recruitment-process-vector-human-resources-choice-of-candidate-employee-office-chair-vacancy-executive-search-recruiting-hiring-hr-isolated-illustration.jpg" alt="Recruitment Process">
+                    <div class="description">
+                        <p style="color: purple;">Employee Focused</p>
+                    </div>
+                </div>
+				 <div class="image-container">
+                    <img src="https://media.istockphoto.com/id/1159062416/video/flat-cartoon-businesswoman-and-businessman-character-handshake-business-agreement-animation.jpg?s=640x640&k=20&c=PiQ6vh4lkwIT663XYAx1Zrm63_Wv7pTMhzK69yOlgGc=" alt="Recruitment Process">
+                    <div class="description">
+                        <p style="color: purple;">Mutual Success</p>
+                    </div>
+                </div>
+				<div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVlw6mH1xhU-OPbu3GTi75v9enJss4bptjhp76uLbFGQ&s.jpg" alt="Recruitment Process">
+                    <div class="description">
+                        <p style="color: purple;">Personalised Job Matching</p>
+                    </div>
+                </div>
+				<div class="image-container">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF7nQQ6dEgc-JOnIAuT2IwEOS3f4SOGISLacuuWgCP9A&s" alt="Recruitment Process">
+                    <div class="description">
+                        <p style="color: purple;">Strategic Career Development</p>
+                    </div>
+                </div>
+				
+            </div>
+        </section>
+    </section>
+    <script>
+        function showLogin() {
+            document.getElementById("loginContainer").style.display = "block";
+            document.getElementById("registerContainer").style.display = "none";
+        }
+        function showRegister() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "block";
+            document.getElementById("employeeFields").style.display = "block";
+            document.getElementById("organizationFields").style.display = "none";
+        }
+        document.getElementById("userType").addEventListener("change", function() {
+            if (this.value === "employee") {
+                document.getElementById("employeeFields").style.display = "block";
+                document.getElementById("organizationFields").style.display = "none";
+            } else {
+                document.getElementById("employeeFields").style.display = "none";
+                document.getElementById("organizationFields").style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>

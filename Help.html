@@ -1,0 +1,537 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Climb</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            /* Ensure the body covers at least the viewport height */
+            /* background-image: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.alamyimages.fr%2Fsymbole-de-partenaire-de-soutien-blocs-en-bois-avec-les-mots-partenaire-de-service-sur-un-magnifique-fond-blanc-main-d-homme-d-affaires-activite-et-soutien-image424930306.html&psig=AOvVaw3VDOQ6v7oxlVmspeslO3Vk&ust=1713692448815000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNj74oPA0IUDFQAAAAAdAAAAABA5'); */
+            background-size: 1000px 900px;
+            /* Cover the entire body */
+            background-repeat: no-repeat;
+            background-position: center right;
+            /* Image positioned at the top right */
+        }
+
+        nav {
+            position: relative;
+            width: 524px;
+            height: 50px;
+            background: #222;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            position: relative;
+            display: inline-block;
+            font-size: 1em;
+            font-weight: 500;
+            color: #f5efef;
+            text-decoration: none;
+            padding: 0 23px;
+            z-index: 1;
+        }
+        .find-job-btn,
+        .hire-employee-btn {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px;
+            /* Added margin to separate buttons */
+        }
+
+        .find-job-btn:hover,
+        .hire-employee-btn:hover {
+            background-color: #6a0080;
+        }
+
+        .quote-buttons {
+            display: flex;
+        }
+
+        nav span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 95px;
+            height: 100%;
+            background: linear-gradient(45deg, #4f1919, #ff3333);
+            border-radius: 8px;
+            transition: .5s;
+        }
+
+        nav a:hover~span {
+            left: 0;
+        }
+
+        nav a:nth-child(2):hover~span {
+            left: 110px;
+        }
+
+        nav a:nth-child(3):hover~span {
+            left: 230px;
+
+        }
+
+        nav a:nth-child(4):hover~span {
+            left: 300px;
+            width: 115px;
+        }
+
+        nav a:nth-child(5):hover~span {
+            left: 413px;
+            width: 110px;
+        }
+
+        header {
+            background-color: purple;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .large-letter {
+            font-size: 2em;
+        }
+
+        .small-letter {
+            font-size: 2em;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            color: #181818;
+            font-size: 17px;
+            font-weight: 500;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 0 #fec1958c;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .star-1 {
+            position: absolute;
+            top: 20%;
+            left: 10px;
+            /* Adjusted position */
+            width: 25px;
+            height: auto;
+            filter: drop-shadow(0 0 0 #fffdef);
+            z-index: -5;
+        }
+
+        .login-btn:hover {
+            background-color: #fec195;
+            border-color: #fec195;
+            box-shadow: 0 0 20px #fec1958c;
+        }
+
+        .star-2 {
+            position: absolute;
+            top: -25px;
+            left: 10px;
+            /* Adjusted position */
+            width: 15px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #fffdef);
+            z-index: 2;
+        }
+        .login-container {
+            text-align: center;
+
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="file"] {
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px;
+            /* Adjusted width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"],
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #add8e6;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        .register-btn:hover {
+            background-color: #ffb6c1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            
+        }
+
+        /* Updated CSS for close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: black;
+            /* Keep the wrong mark in black */
+            transition: background-color 0.3s, padding 0.3s;
+            /* Add transition for background color and padding */
+            padding: 5px;
+            /* Add padding to increase the area */
+        }
+
+        .close-btn:hover {
+            background-color: red;
+            /* Change background color to red on hover */
+            padding: 10px;
+            /* Increase padding on hover */
+        }
+
+        form {
+            display: inline-block;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="search"] {
+            flex-grow: 1;
+            padding: 10px;
+            border: 8px solid #ccc;
+            border-radius: 6px;
+            margin-left: 1200px;
+        }
+
+        button[type="submit"] {
+            padding: 8px 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-left: 1400px;
+        }
+        #myText:target {
+            display: block;
+            /* font-size: 100px; */
+        }
+
+        #mySearch {
+            transition: width 0.5s ease-in-out;
+            /* Add transition property */
+            width: 400px;
+            height: 50px;
+            margin: 50px;
+            /* Initial width */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+
+        }
+
+        option {
+            color: black;
+        }
+
+        .center{
+            display: flex;
+            justify-content: center;
+        }
+        .headers {
+            display: flex;
+            flex-direction: column;
+            height: 100px;
+            text-align: center;
+            /* position: relative; */
+        }
+        
+        .accordion {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .accordion-header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .accordion-body {
+            display: none;
+            padding: 10px;
+        }
+
+        /* Hide checkbox */
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Show accordion body when checkbox is checked */
+        input[type="checkbox"]:checked~.accordion-body {
+            display: block;
+        }
+
+        /* Style the label to look like the accordion header */
+        input[type="checkbox"]+label {
+            display: block;
+            padding: 10px;
+            background-color: #f4f4f4;
+            cursor: pointer;
+        }
+
+        /* Rotate the arrow icon based on checkbox state */
+        input[type="checkbox"]+label::after {
+            content: "\25B6"; /* Arrow icon */
+            float: right;
+            transition: transform 0.3s ease;
+        }
+
+        input[type="checkbox"]:checked+label::after {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><span class="large-letter">C</span>areer <span class="small-letter">C</span>limb</h1>
+        <nav> 
+		    <a href="./home.html">About</a>
+            <a href="./Features.html">Features</a>
+            <a href="./Services.html">Services</a>
+            <a href="help.html">Help</a>
+            <a href="contactus.html">Contact us</a>
+		    <span></span>
+		</nav>
+        <button class="login-btn" onclick="showLogin()" style="color:white;">Login<span class="star-1"><img class="star-2" src="https://www.iconsdb.com/icons/preview/white/star-xxl.png" alt="Star"></span></button>
+    </header>
+    <div class="center">
+    <select type="text" id="mySearch" onchange="change_func(value)" onkeyup="myFunction()" placeholder="Search.."
+        title="Type in a category" style="font-size: 20px;">
+        <option value="1">Instructions and Tutorials</option>
+        <option value="2">FAQs</option>
+        <option value="3">Tips and Tricks</option>
+        <option value="4">User Manuals</option>
+        <option value="5">Regulatory Information</option>
+    </select>
+</div>
+    <main class="center">
+        <section id="instructions" class="headers">
+            <h2>Instructions and Tutorials</h2>
+            <div class="content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion1">
+                        <label for="accordion1" class="accordion-header">Getting started guide</label>
+                        <div class="accordion-body">
+                        Step-by-step instructions on how to create an account, set up a profile, and navigate the platform.                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion2">
+                        <label for="accordion2" class="accordion-header">Interactive Guides:
+                        </label>
+                        <div class="accordion-body">
+                            Allow users to interact with the guides to simulate real-life scenarios and help them familiarize themselves with the platform's features                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section id="faqs" class="headers" style ="display: none;">
+            <h2>FAQs</h2>
+            <!-- Add your FAQs content here -->
+            <div class="content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion3">
+                        <label for="accordion3" class="accordion-header">Common questions</label>
+                        <div class="accordion-body">
+                            Address common queries that users may have about the platform, such as account management, privacy settings, and payment options.                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion4">
+                        <label for="accordion4" class="accordion-header">Troubleshooting</label>
+                        <div class="accordion-body">
+                            Provide solutions to common issues or errors that users might encounter while using the platform.                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section id="tips" class="headers"style ="display: none;">
+            <h2>Tips and Tricks</h2>
+            <div class="content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion5">
+                        <label for="accordion5" class="accordion-header">Profile Optimization Tips</label>
+                        <div class="accordion-body">
+                            Suggestions on how users can optimize their profiles to attract employers or clients.                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion6">
+                        <label for="accordion6" class="accordion-header">Networking Strategies</label>
+                        <div class="accordion-body">
+                            Advice on how to network effectively within the platform to expand professional connections.                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion7">
+                        <label for="accordion7" class="accordion-header">Job Search Tips</label>
+                        <div class="accordion-body">
+                            Tips for finding and applying to jobs effectively, including resume writing and interview preparation tips.                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="content">
+                <h2>
+                </h2>
+            </div>
+        </section>
+        <br>
+        <section id="manuals" class="headers"style ="display: none;">
+            <h2>User Manuals</h2>
+            <div class="content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion8">
+                        <label for="accordion8" class="accordion-header">Platform Features Overview</label>
+                        <div class="accordion-body">
+                            Detailed explanations of all the features available on the platform, including any advanced functionalities.                        </div>
+                    </div>                
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion9">
+                        <label for="accordion9" class="accordion-header">Account Settings Guide</label>
+                        <div class="accordion-body">
+                            Instructions on how users can customize their account settings, preferences, and notifications.                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <br>
+        <section id="regulatory" class="headers"style ="display: none;">
+            <h2>Regulatory Information</h2>
+            <div class="content">
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion10">
+                        <label for="accordion10" class="accordion-header">Terms of Service</label>
+                        <div class="accordion-body">
+                            Detailed information about the terms and conditions that govern the use of the platform.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <input type="checkbox" id="accordion11">
+                        <label for="accordion11" class="accordion-header">Privacy Policy</label>
+                        <div class="accordion-body">
+                            Explanation of how user data is collected, stored, and used, along with information about data protection and privacy rights.                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Add your footer content here -->
+    </footer>
+    <script>
+ function change_func(value) {
+    var val = parseInt(value);
+    var sections = document.querySelectorAll('.headers');
+    
+    // Hide all sections initially
+    sections.forEach(section => {
+        section.style.display = "none";
+    });
+    
+    // Show the selected section
+    switch (val) {
+        case 1:
+            document.getElementById('instructions').style.display = "block";
+            break;
+        case 2:
+            document.getElementById('faqs').style.display = "block";
+            break;
+        case 3:
+            document.getElementById('tips').style.display = "block";
+            break;
+        case 4:
+            document.getElementById('manuals').style.display = "block";
+            break;
+        case 5:
+            document.getElementById('regulatory').style.display = "block";
+            break;
+        default:
+            break;
+    }
+}
+
+
+        function getContent(sectionId) {
+            var section = document.getElementById(sectionId);
+            var content = section.querySelector('.content h2').textContent;
+            return content;
+        }
+    </script>
+</body>
+
+</html>

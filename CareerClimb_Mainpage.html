@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Climb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body covers at least the viewport height */
+            background-image: url('https://images.inc.com/uploaded_files/image/1920x1080/getty_508399085_2000133320009280270_319046.jpg');
+            background-size: 1000px 900px; /* Cover the entire body */
+            background-repeat: no-repeat;
+            background-position:center right; /* Image positioned at the top right */
+
+        }
+
+        nav {
+            position:relative;
+            width:524px;
+            height:50px;
+            background:#222;
+            border-radius:8px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        nav a {
+            position:relative;
+            display: inline-block;
+            font-size:1em;
+            font-weight:500;
+            color:#fff;
+            text-decoration:none;
+            padding:0 23px;
+            z-index: 1;
+        }
+        .quote {
+            position: absolute;
+            left: 50px; /* Adjusted position */
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 300px;
+            background-color: white; /* Background color changed to white */
+        }
+
+        .large-quote {
+            font-size: 1.8em; /* Increased font size */
+            color: #333;
+            font-style: italic;
+            font-weight: bold; /* Bold text */
+        }
+
+        .find-job-btn, .hire-employee-btn {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-right: 10px; /* Added margin to separate buttons */
+        }
+
+        .find-job-btn:hover, .hire-employee-btn:hover {
+            background-color: #6a0080;
+        }
+
+        .quote-buttons {
+            display: flex;
+        }
+
+        nav span {
+            position:absolute;
+            top:0;
+            left:0;
+            width:95px;
+            height:100%;
+            background: linear-gradient(45deg, #4f1919,#ff3333);
+            border-radius:8px;
+            transition:.5s;
+        }
+
+        nav a:hover~span {
+            left:0;
+        }
+
+        nav a:nth-child(2):hover~span {
+            left:110px;
+        }
+
+        nav a:nth-child(3):hover~span {
+            left:230px;
+
+        }
+
+        nav a:nth-child(4):hover~span {
+            left:300px;
+            width:115px;
+        }
+
+        nav a:nth-child(5):hover~span {
+            left:413px;
+            width:110px;
+        }
+
+        header {
+            background-color: purple;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-style: italic;
+        }
+
+        .large-letter {
+            font-size: 2em;
+        }
+
+        .small-letter {
+            font-size: 2em;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: transparent;
+            color: #181818;
+            font-size: 17px;
+            font-weight: 500;
+            border: 3px solid transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 0 #fec1958c;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .star-1 {
+            position: absolute;
+            top: 20%;
+            left: 10px; /* Adjusted position */
+            width: 25px;
+            height: auto;
+            filter: drop-shadow(0 0 0 #fffdef);
+            z-index: -5;
+        }
+
+        .login-btn:hover {
+            background-color: #fec195;
+            border-color: #fec195;
+            box-shadow: 0 0 20px #fec1958c;
+        }
+
+        .star-2 {
+            position: absolute;
+            top: -25px;
+            left: 10px; /* Adjusted position */
+            width: 15px;
+            height: auto;
+            filter: drop-shadow(0 0 10px #fffdef);
+            z-index: 2;
+        }
+
+        /* Additional CSS for login pop-up */
+        #loginContainer, #registerContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            width: 400px; /* Adjusted width */
+            max-height: 400px; /* Adjusted height */
+            overflow: auto;
+        }
+
+        .login-container {
+            text-align: center;
+
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="file"],
+	    input[type="number"]
+
+		{
+            margin: 10px 0;
+            padding: 8px;
+            width: 300px; /* Adjusted width */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"],
+        .register-btn {
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            background-color: #add8e6;
+            color: #fff;
+            font-size: 17px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button[type="submit"]:hover,
+        .register-btn:hover {
+            background-color: #ffb6c1;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Updated CSS for close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: black; /* Keep the wrong mark in black */
+            transition: background-color 0.3s, padding 0.3s; /* Add transition for background color and padding */
+            padding: 5px; /* Add padding to increase the area */
+        }
+
+        .close-btn:hover {
+            background-color: red; /* Change background color to red on hover */
+            padding: 10px; /* Increase padding on hover */
+            border-radius: 50%;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="large-letter">C</span>areer <span class="small-letter">C</span>limb</h1>
+        <nav> 
+            <a href="./new1.html">About</a>
+            <a href="./Features.html">Features</a>
+            <a href="./Services.html">Services</a>
+            <a href="Help.html">Help</a>
+            <a href="contactus.html">Contact us</a>
+            <span></span>
+        </nav>
+        <button class="login-btn" onclick="showLogin()" style="color:white;">Login<span class="star-1"><img class="star-2" src="https://www.iconsdb.com/icons/preview/white/star-xxl.png" alt="Star"></span></button>
+    </header>
+    <div class="container" id="loginContainer">
+        <div class="login-container">
+            <h2>Login</h2>
+            <!-- Close button with class close-btn -->
+            <div class="close-btn" onclick="hideForm()">&#10005;</div>
+            <form method="POST" action="login.php">
+                <input type="text" placeholder="Username">
+                <br>
+                <input type="password" placeholder="Password">
+                <br>
+                <button type="submit">Login</button>
+                <br>
+                <p><a href="#">Forgot password?</a></p>
+                <p>Don't have an account? <span class="register-btn" onclick="showRegister()">Register</span></p>
+            </form>
+        </div>
+    </div>
+    
+     <div class="quote">
+        <p class="large-quote">Don't be afraid to start over. It's a brand new opportunity to rebuild what you truly want.</p>
+        <div class="quote-buttons">
+            <button class="find-job-btn" onclick="checkLogin('find-job')">Find a New Job</button>
+            <button class="hire-employee-btn" onclick="checkLogin('hire-employee')">Hire an Employee</button> <!-- New button added -->
+        </div>
+    </div>
+    
+    <div class="container" id="registerContainer" style="display:none;">
+        <div class="login-container">
+            <h2>Register</h2>
+            <!-- Close button with class close-btn -->
+            <div class="close-btn" onclick="hideForm()">&#10005;</div>
+            <form>
+                <label for="userType">Register as:</label>
+                <select id="userType">
+                    <option value="employee">Unemployee</option>
+                    <option value="organization">Organization</option>
+                </select>
+                <br>
+                <input type="text" placeholder="Username" required>
+                <br>
+               <input type="email" placeholder="Email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+				<br>
+
+                <input type="password" placeholder="Password" required>
+                <br>
+                <div id="employeeFields">
+                    <input type="text" placeholder="Name" required>
+                    <br>
+					<input type="number" placeholder="Age" required min="19">
+                    <br>
+                    <input type="file" accept=".pdf,.doc,.docx" required>
+                    <br>
+                    <input type="text" placeholder="Desired role" required>
+                </div>
+                <div id="organizationFields" style="display:none;">
+                    <input type="text" placeholder="Organization name" required>
+                    <br>
+                    <input type="text" placeholder="Vacant job name" required>
+                    <br>
+                    <input type="number" placeholder="Number of vacancies" required>
+                </div>
+                <br>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" onclick="showLogin()">Login here</a></p>
+        </div>
+    </div>
+    <script>
+        function showLogin() {
+            document.getElementById("loginContainer").style.display = "block";
+            document.getElementById("registerContainer").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "block";
+            document.getElementById("employeeFields").style.display = "block";
+            document.getElementById("organizationFields").style.display = "none";
+        }
+
+        document.getElementById("userType").addEventListener("change", function() {
+            if (this.value === "employee") {
+                document.getElementById("employeeFields").style.display = "block";
+                document.getElementById("organizationFields").style.display = "none";
+            } else {
+                document.getElementById("employeeFields").style.display = "none";
+                document.getElementById("organizationFields").style.display = "block";
+            }
+        });
+
+        function hideForm() {
+            document.getElementById("loginContainer").style.display = "none";
+            document.getElementById("registerContainer").style.display = "none";
+        }
+
+        function checkLogin(action) {
+            // Check if user is logged in
+            // For demonstration purpose, assuming user is not logged in
+            var isLoggedIn = false;
+
+            if (!isLoggedIn) {
+                alert("Please login to " + action);
+                showLogin(); // Show login form
+            } else {
+                // If user is logged in, perform the action (redirect or show content)
+                if (action === "find-job") {
+                    // Redirect to find job page or perform other action
+                    window.location.href = "./findjob.html";
+                } else if (action === "hire-employee") {
+                    // Redirect to hire employee page or perform other action
+                    window.location.href = "./hireemployee.html";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
